@@ -17,6 +17,7 @@
     value: "{{ item.value }}"
     reload: true
     state: "{{ item.state | default('present') }}"
+    sysctl_file: "{{ item.file | default('/etc/sysctl.conf') }}"
   with_items: "{{ sysctl_settings }}"
   tags:
     - configuration

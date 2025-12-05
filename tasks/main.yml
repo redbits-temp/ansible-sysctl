@@ -23,3 +23,16 @@
     - configuration
     - sysctl
     - sysctl-settings
+
+- name: set sysctl settings (per file)
+  ansible.posix.sysctl:
+    name: "{{ item.1.name }}"
+    value: "{{ item.1.value }}"
+    reload: true
+    state: "{{ item.1.state | default('present') }}"
+    sysctl_file: "{{ item.0.file }}"
+  loop: "{{ sysctl_settings_d | subelements('settings') }}"
+  tags:
+    - configuration
+    - sysctl
+    - sysctl-settings

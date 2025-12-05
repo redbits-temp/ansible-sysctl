@@ -32,7 +32,7 @@
     state: "{{ item.0.state | default('present') }}"
     sysctl_file: "{{ item.1.file }}"
   with_subelements:
-    - "{{ sysctl_settings_grouped }}"
+    - "{{ sysctl_settings_d }}"
     - settings
   tags:
     - configuration
